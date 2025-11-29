@@ -32,7 +32,7 @@ local function menuListener(event)
 		local id = event.target.id
 
 		if id == "play" then
-			composer.gotoScene("Scenes.levelSelect", {effect = "fade", time = 500})
+			composer.gotoScene("Scenes.street", {effect = "fade", time = 500})
 
 		elseif id == "options" then
 			composer.showOverlay("Scenes.options", {
