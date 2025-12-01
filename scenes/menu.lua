@@ -57,7 +57,7 @@ function scene:create( event )
 	-- Tämä koodi ajetaan kun scene on luotu,
 	-- mutta sitä ei vielä näytetä ruudulla.
 	local background = display.newImage(
-		sceneGroup, "assets/images/backgrounds/menu.png",
+		sceneGroup, "assets/images/backgrounds/drunkennight_tausta.png",
 		screen.centerX,
 		screen.centerY
 	)
@@ -65,14 +65,14 @@ function scene:create( event )
 	local scale = math.max(screen.width/background.width, screen.height/background.height)
 	background.xScale, background.yScale = scale, scale
 
-	local title = ui.newTitle({
-		parent = sceneGroup,
-		text = "Tasohyppely",
-		fontSize = 48,
-		rgb = {1,1,1},
-	})
-	title.x = screen.centerX
-	title.y = screen.minY + title.height*0.5 + 10
+	--local title = ui.newTitle({
+	--	parent = sceneGroup,
+	--	text = "Tasohyppely",
+	--	fontSize = 48,
+	--	rgb = {1,1,1},
+	--})
+	--title.x = screen.centerX
+	--title.y = screen.minY + title.height*0.5 + 10
 
 	buttonPlay = widget.newButton(
 		{
