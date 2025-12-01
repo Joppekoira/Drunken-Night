@@ -237,8 +237,8 @@ function scene:create(event)
         { name="walkDownRight", frames={1,2,3,4,5,6,7}, time=1300, loopCount=0 },
         { name="walkDownLeft", frames={1,2,3,4,5,6,7}, time=1300, loopCount=0 }
     })
-    local drunkenguyShape = { 0,-37, 37,-10, 23,34, -23,34, -37,-10 }
-    physics.addBody( drunkenguy, {shape = drunkenguyShape})
+    --local drunkenguyShape = { -15,-40, -10,-10, -10,60, -35, 60, -45,-10 }
+    --physics.addBody( drunkenguy, {shape = drunkenguyShape})
 
     drunkenguy.x = 820
     drunkenguy.y = 490
