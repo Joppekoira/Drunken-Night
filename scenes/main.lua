@@ -4,7 +4,7 @@ local scene = composer.newScene()
 
 local physics = require("physics")
 physics.start()
-physics.setDrawMode( "hybrid" )
+physics.setDrawMode( "normal" )
 physics.setGravity(0, 0)
 
 -- Forward declarations
@@ -31,7 +31,7 @@ local keysPressed = _G.keysPressed
 
 -- Global health tracking
 if not _G.playerHealth then
-    _G.playerHealth = 1
+    _G.playerHealth = 100
 end
 
 -- Update hearts display (KÄYTTÄÄ UUSIA KUVIA)
@@ -202,7 +202,7 @@ function scene:create(event)
         local tile = display.newImageRect("assets/images/tiles/ML.png", 80, 20)
         tile.x = tilePositions[i].x
         tile.y = tilePositions[i].y
-        physics.addBody(tile, "static", {density = 100})
+        physics.addBody(tile, "static", {density = -1})
         sceneGroup:insert(tile)
         tiles[i] = tile
     end
@@ -237,8 +237,8 @@ function scene:create(event)
         { name="walkDownRight", frames={1,2,3,4,5,6,7}, time=1300, loopCount=0 },
         { name="walkDownLeft", frames={1,2,3,4,5,6,7}, time=1300, loopCount=0 }
     })
-    --local drunkenguyShape = { -15,-40, -10,-10, -10,60, -35, 60, -45,-10 }
-    --physics.addBody( drunkenguy, {shape = drunkenguyShape})
+    local drunkenguyShape = { -15,-40, -10,-10, -10,60, -35, 60, -45,-10 }
+    physics.addBody( drunkenguy, "dynamic", {shape = drunkenguyShape})
 
     drunkenguy.x = 820
     drunkenguy.y = 490
@@ -301,7 +301,7 @@ function scene:show(event)
                     sceneActive = false
                     Runtime:removeEventListener("key", self.onKey)
                     Runtime:removeEventListener("enterFrame", self.gameLoop)
-                    composer.gotoScene("scenes.kiosk", {
+                    composer.gotoScene("scenes.street", {
                         effect = "slideLeft",
                         time = 300,
                         params = { fromMain = true }

@@ -9,6 +9,7 @@ local kiosk
 local kioskCollisionBox
 local currentFrequence = "walkRight"
 local speed = 2
+local tiles = {}
 
 -- Global keys table
 if not _G.keysPressed then
@@ -45,6 +46,38 @@ function scene:create(event)
     backGround.y = display.contentCenterY
     sceneGroup:insert(backGround)
 
+    -- Create tiles (UUDET PAIKAT - eivät osu baariin)
+    local tilePositions = {
+        {x = 240, y = 450},
+        {x = 360, y = 500},
+        {x = 480, y = 400},
+        {x = 600, y = 500},
+        {x = 720, y = 500},
+        {x = 840, y = 500}
+    }
+
+    for i = 1, #tilePositions do
+        local tile = display.newImageRect("assets/images/tiles/ML.png", 80, 20)
+        tile.x = tilePositions[i].x
+        tile.y = tilePositions[i].y
+        physics.addBody(tile, "static", {density = -1})
+        sceneGroup:insert(tile)
+        tiles[i] = tile
+    end
+
+    COINS_NEEDED = #tilePositions
+    -- Create coins (on the top of tiles)
+    for i = 1, COINS_NEEDED do
+        local coin = display.newImageRect("assets/images/objects/coin.png", 40, 40)
+        coin.x = tilePositions[i].x
+        coin.y = tilePositions[i].y - 40
+        sceneGroup:insert(coin)
+
+        coins[i] = {image = coin, collected = false}
+    end
+
+    self.coins = coins
+
     -- Load kiosk (left side, lower)
     kiosk = display.newImageRect("assets/images/objects/kioski.png", 200, 300)
     kiosk.x = 100
@@ -79,6 +112,9 @@ function scene:create(event)
     drunkenguy.xScale = 0.5
     drunkenguy.yScale = 0.5
     sceneGroup:insert(drunkenguy)
+
+    local drunkenguyShape = { -15,-40, -10,-10, -10,60, -35, 60, -45,-10 }
+    physics.addBody( drunkenguy, "dynamic", {shape = drunkenguyShape})
 
     -- Save to scene data
     self.kiosk = kiosk
@@ -138,7 +174,7 @@ function scene:show(event)
                 sceneActive = false
                 Runtime:removeEventListener("key", self.onKey)
                 Runtime:removeEventListener("enterFrame", self.gameLoop)
-                composer.gotoScene("scenes.main", {
+                composer.gotoScene("scenes.street", {
                     effect = "slideLeft",
                     time = 300,
                     params = { fromKiosk = true }
@@ -151,7 +187,7 @@ function scene:show(event)
                 Runtime:removeEventListener("key", self.onKey)
                 Runtime:removeEventListener("enterFrame", self.gameLoop)
                 audio.stop()
-                composer.gotoScene("scenes.street", {
+                composer.gotoScene("scenes.home", {
                     effect = "slideLeft",
                     time = 300,
                     params = { fromKiosk = true }
