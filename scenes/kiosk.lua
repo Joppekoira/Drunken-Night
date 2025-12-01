@@ -104,9 +104,9 @@ function scene:create(event)
     self.coinCounterText = coinCounterText
 
     -- Load kiosk (left side, lower)
-    kiosk = display.newImageRect("assets/images/objects/kioski.png", 200, 300)
-    kiosk.x = 100
-    kiosk.y = display.contentCenterY + 105
+    kiosk = display.newImageRect("assets/images/objects/kioski.png", 256, 256)
+    kiosk.x = 50
+    kiosk.y = display.contentCenterY + 150
     sceneGroup:insert(kiosk)
 
     hotdog = display.newImageRect("assets/images/objects/hodari_obj.png", 64, 64)
