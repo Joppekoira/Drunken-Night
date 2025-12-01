@@ -138,7 +138,7 @@ function scene:show(event)
                 sceneActive = false
                 Runtime:removeEventListener("key", self.onKey)
                 Runtime:removeEventListener("enterFrame", self.gameLoop)
-                composer.gotoScene("scenes.scene_main", {
+                composer.gotoScene("scenes.main", {
                     effect = "slideLeft",
                     time = 300,
                     params = { fromKiosk = true }
@@ -150,6 +150,7 @@ function scene:show(event)
                 sceneActive = false
                 Runtime:removeEventListener("key", self.onKey)
                 Runtime:removeEventListener("enterFrame", self.gameLoop)
+                audio.stop()
                 composer.gotoScene("scenes.street", {
                     effect = "slideLeft",
                     time = 300,
