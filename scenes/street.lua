@@ -193,10 +193,10 @@ function scene:create(event)
     local tilePositions = {
         {x = 120, y = 500},
         {x = 240, y = 450},
-        {x = 360, y = 500},
+        {x = 360, y = 425},
         {x = 480, y = 400},
-        {x = 600, y = 500},
-        {x = 720, y = 500},
+        {x = 600, y = 400},
+        {x = 720, y = 450},
         {x = 840, y = 500}
     }
 
@@ -242,7 +242,7 @@ function scene:create(event)
     local drunkenguyShape = { -15,-40, -10,-10, -10,60, -35, 60, -45,-10 }
     physics.addBody( drunkenguy, "dynamic", {shape = drunkenguyShape})
 
-    drunkenguy.x = 820
+    drunkenguy.x = 890
     drunkenguy.y = 490
     drunkenguy:setSequence("walkLeft")
     drunkenguy.xScale = 0.5

@@ -15,7 +15,7 @@ function scene:create(event)
     sceneGroup:insert(blackBg)
 
     -- Full text (for reference)
-    local fullText = "Hot dogs...\nmy favourite"
+    local fullText = "Mmmmm...\nHot dogs...\nmy favourite"
 
     -- Create text display (starts empty)
     local cutsceneText = display.newText({

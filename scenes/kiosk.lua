@@ -6,6 +6,7 @@ local scene = composer.newScene()
 local move = require("scripts.move")
 local drunkenguy
 local kiosk
+local hotdog
 local kioskCollisionBox
 local currentFrequence = "walkRight"
 local speed = 2
@@ -107,6 +108,11 @@ function scene:create(event)
     kiosk.x = 100
     kiosk.y = display.contentCenterY + 105
     sceneGroup:insert(kiosk)
+
+    hotdog = display.newImageRect("assets/images/objects/hodari_obj.png", 64, 64)
+    hotdog.x = 50
+    hotdog.y = 320
+    sceneGroup:insert(hotdog)
 
     -- Create invisible collision box
     kioskCollisionBox = display.newRect(100, display.contentCenterY + 105, 120, 200)
