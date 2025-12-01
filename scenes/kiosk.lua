@@ -10,6 +10,10 @@ local kioskCollisionBox
 local currentFrequence = "walkRight"
 local speed = 2
 local tiles = {}
+local coins = {}
+-- Coin system
+local coinsCollected = 0
+local COINS_NEEDED = 5
 
 -- Global keys table
 if not _G.keysPressed then
@@ -31,6 +35,14 @@ local function checkCollision(player, collisionBox)
 
     return not (playerLeft > boxRight or playerRight < boxLeft or
                 playerTop > boxBottom or playerBottom < boxTop)
+end
+
+    -- Function to check coin collision
+local function checkCoinCollision(player, coin)
+    local dx = player.x - coin.x
+    local dy = player.y - coin.y
+    local distance = math.sqrt(dx*dx + dy*dy)
+    return distance < 50
 end
 
 function scene:create(event)
@@ -77,6 +89,18 @@ function scene:create(event)
     end
 
     self.coins = coins
+
+ -- Coin counter display (top right)
+    local coinCounterBg = display.newRoundedRect(screenW - 100, 60, 150, 50, 8)
+    coinCounterBg:setFillColor(0.2, 0.2, 0.3)
+    sceneGroup:insert(coinCounterBg)
+
+    local coinCounterText = display.newText("Coins: 0/" .. COINS_NEEDED,
+                                            screenW - 100, 60, native.systemFontBold, 24)
+    coinCounterText:setFillColor(1, 0.8, 0)
+    sceneGroup:insert(coinCounterText)
+
+    self.coinCounterText = coinCounterText
 
     -- Load kiosk (left side, lower)
     kiosk = display.newImageRect("assets/images/objects/kioski.png", 200, 300)
@@ -161,6 +185,19 @@ function scene:show(event)
             local oldY = drunkenguy.y
 
             currentFrequence = move.update(drunkenguy, keysPressed, currentFrequence, speed)
+
+           -- Check coin collection
+            for i = 1, #coins do
+                if not coins[i].collected and checkCoinCollision(drunkenguy, coins[i].image) then
+                    coins[i].collected = true
+                    coins[i].image.isVisible = false
+                    coinsCollected = coinsCollected + 1
+
+                    self.coinCounterText.text = "Coins: " .. coinsCollected .. "/" .. COINS_NEEDED
+
+                    print("Coin collected! Total: " .. coinsCollected .. "/" .. COINS_NEEDED)
+                end
+            end
 
             -- Check collision with kiosk (use collision box)
             if checkCollision(drunkenguy, kioskCollisionBox) then

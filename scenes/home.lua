@@ -47,7 +47,7 @@ function scene:create(event)
                     alpha = 0,
                     onComplete = function()
                         -- Go back to menu after cutscene
-                        composer.gotoScene("scenes.scene_menu", {
+                        composer.gotoScene("scenes.menu", {
                             effect = "fade",
                             time = 500
                         })

@@ -181,13 +181,13 @@ function scene:create(event)
     self.coinCounterText = coinCounterText
 
     -- Health hearts (UUDET KUVAT - top center)
-    for i = 1, 3 do
-        local heart = display.newImageRect("assets/images/ui/heart_full.png", 32, 32)
-        heart.x = screenW/2 - 50 + (i-1)*40
-        heart.y = 40
-        sceneGroup:insert(heart)
-        hearts[i] = heart
-    end
+   -- for i = 1, 3 do
+   --     local heart = display.newImageRect("assets/images/ui/heart_full.png", 32, 32)
+     --   heart.x = screenW/2 - 50 + (i-1)*40
+     --   heart.y = 40
+     --   sceneGroup:insert(heart)
+    --    hearts[i] = heart
+   -- end
 
     -- Create tiles (UUDET PAIKAT - eivät osu baariin)
     local tilePositions = {
